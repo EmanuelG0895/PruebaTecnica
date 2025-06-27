@@ -17,11 +17,7 @@ const character = {
   created: "2017-11-04T18:48:46.250Z",
 };
 
-const App = () => (
-  <div className="mt-10 text-3xl mx-auto max-w-6xl">
-    <CharacterInfo character={character} />
-  </div>
-);
+const App = () => <CharacterInfo character={character} />;
 
 const root = ReactDOM.createRoot(document.getElementById("app") as HTMLElement);
 root.render(<App />);

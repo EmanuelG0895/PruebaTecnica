@@ -1,13 +1,35 @@
 import ReactDOM from "react-dom/client";
-
+import React, { Suspense } from "react";
 import "./index.css";
-import CharacterInfo from "MF_CharacterDetail/CharacterInfo";
-
+const CharacterInfo = React.lazy(
+  () => import("MF_CharacterDetail/CharacterInfo")
+);
+const character = {
+  name: "Rick Sanchez",
+  status: "Alive",
+  species: "Human",
+  gender: "Male",
+  origin: { name: "Earth (C-137)" },
+  location: { name: "Earth (C-137)" },
+  type: "Human",
+  image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+  episode: [],
+  created: "2017-11-04T18:48:46.250Z",
+};
 const App = () => (
   <div className="mt-10 text-3xl mx-auto max-w-6xl">
-    <div>Name: MF-Shell</div>
-    <div>Framework: react-18</div>
-    <CharacterInfo />
+
+    <Suspense fallback={<div>Cargando...</div>}>
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+      <CharacterInfo character={character} />
+    </Suspense>
   </div>
 );
 

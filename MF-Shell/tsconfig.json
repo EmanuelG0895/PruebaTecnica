@@ -13,10 +13,10 @@
     "useDefineForClassFields": true,
     "allowImportingTsExtensions": true,
     "paths": {
-      "*": ["./@mf-types/*"]
+      "MF_CharacterDetail/*": ["./src/types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/types/federation.d.ts"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

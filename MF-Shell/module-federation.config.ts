@@ -1,8 +1,13 @@
+import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
+
 export const mfConfig = {
   name: "MF_Shell",
   remotes: {
-    MF_CharacterDetail: "http://localhost:3003",
+    MF_CharacterDetail:
+      "MF_CharacterDetail@http://localhost:3003/remoteEntry.js",
   },
-  exposes: {},
-  shared: ["react", "react-dom"],
+  shared: {
+    react: { singleton: true },
+    "react-dom": { singleton: true },
+  },
 };

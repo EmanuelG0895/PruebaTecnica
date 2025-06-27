@@ -9,7 +9,6 @@ import { mfConfig } from "./module-federation.config";
 
 const isDev = process.env.NODE_ENV === "development";
 
-// Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"];
 
 export default defineConfig({
@@ -18,19 +17,22 @@ export default defineConfig({
     main: "./src/index.ts",
   },
   resolve: {
-    extensions: ["...", ".ts", ".tsx", ".jsx"],
+    extensions: [".tsx", ".ts", ".jsx", ".js", "..."], // Pon extensiones en orden común
   },
 
   devServer: {
     port: 3000,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, "src")],
+    headers: {
+      // Esto ayuda a evitar problemas CORS al consumir remotes en dev
+      "Access-Control-Allow-Origin": "*",
+    },
   },
+
   output: {
-    // You need to set a unique value that is not equal to other applications
-    uniqueName: "MF_Shell",
-    // publicPath must be configured if using manifest
-    publicPath: "http://localhost:3000/",
+    uniqueName: "MF_Shell", // Nombre único para evitar conflictos con otros MF
+    publicPath: "auto", // Para que el publicPath se calcule dinámicamente y funcione con remotes
   },
 
   experiments: {
@@ -45,11 +47,23 @@ export default defineConfig({
       },
       {
         test: /\.css$/,
-        use: ["postcss-loader"],
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: {
+                "@tailwindcss/postcss": {},
+                },
+              },
+            },
+          },
+        ],
         type: "css",
       },
       {
-        test: /\.(jsx?|tsx?)$/,
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: "builtin:swc-loader",
@@ -58,6 +72,8 @@ export default defineConfig({
                 parser: {
                   syntax: "typescript",
                   tsx: true,
+                  decorators: false,
+                  dynamicImport: true,
                 },
                 transform: {
                   react: {
@@ -74,6 +90,7 @@ export default defineConfig({
       },
     ],
   },
+
   plugins: [
     new rspack.HtmlRspackPlugin({
       template: "./index.html",
@@ -81,6 +98,7 @@ export default defineConfig({
     new ModuleFederationPlugin(mfConfig),
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
+
   optimization: {
     minimizer: [
       new rspack.SwcJsMinimizerRspackPlugin(),
