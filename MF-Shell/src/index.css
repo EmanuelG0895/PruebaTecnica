@@ -1,1 +1,6 @@
-@import "tailwindcss";
+/* Ajustes para cards en grid */
+.characters-grid .character-card {
+  margin: 0; /* Remover margin auto del card individual */
+  width: 100%; /* Ocupar todo el espacio del grid item */
+  max-width: none; /* Remover restricción de max-width */
+}

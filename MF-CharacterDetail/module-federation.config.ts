@@ -3,7 +3,7 @@ export const mfConfig = {
   filename: "remoteEntry.js",
   remotes: {},
   exposes: {
-    "./CharacterInfo": "./src/components/CharacterInfo.tsx"
+    "./CharacterInfo": "./src/components/view.tsx",
   },
   shared: ["react", "react-dom"],
 };

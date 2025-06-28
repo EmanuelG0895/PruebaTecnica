@@ -17,20 +17,9 @@ const character = {
   created: "2017-11-04T18:48:46.250Z",
 };
 const App = () => (
-  <div className="mt-10 text-3xl mx-auto max-w-6xl">
-
-    <Suspense fallback={<div>Cargando...</div>}>
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-      <CharacterInfo character={character} />
-    </Suspense>
-  </div>
+  <Suspense fallback={<div>Cargando...</div>}>
+    <CharacterInfo />
+  </Suspense>
 );
 
 const root = ReactDOM.createRoot(document.getElementById("app") as HTMLElement);
