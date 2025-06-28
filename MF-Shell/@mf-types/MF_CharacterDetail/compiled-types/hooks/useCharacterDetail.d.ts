@@ -15,19 +15,15 @@ interface Character {
     episode: any[];
     created: string;
 }
-interface Episode {
-    id: number;
-    name: string;
-    air_date: string;
-    episode: string;
-}
 interface UseCharacterDetailReturn {
-    character: Character | null;
-    episodes: Episode[];
+    characters: Character[];
     loading: boolean;
     error: string | null;
-    loadCharacter: (id: number) => Promise<void>;
-    clearCharacter: () => void;
+    loadCharacters: () => Promise<void>;
+    loadMore: () => void;
+    hasMore: boolean;
+    refetch: () => Promise<void>;
+    clearCharacters: () => void;
 }
 export declare const useCharacterDetail: () => UseCharacterDetailReturn;
 export {};

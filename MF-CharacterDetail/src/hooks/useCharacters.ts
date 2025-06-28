@@ -32,7 +32,7 @@ export const useCharacters = (): UseCharactersReturn => {
     try {
       setLoading(true);
       setError(null);
-      const data = await fetchAllCharacters(page);
+      const data = await fetchAllCharacters();
       setCharacters(data.results || []);
     } catch (err) {
       setError("Error loading characters");

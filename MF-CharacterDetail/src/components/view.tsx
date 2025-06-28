@@ -1,12 +1,23 @@
+import React, { useEffect } from "react";
 import CharacterInfo from "./CharacterInfo";
-import { useCharacters, useSearch } from "../hooks";
+import { useCharacterDetail } from "../hooks/useCharacterDetail"; // importa tu hook modificado
+import { useSearch } from "../hooks";
+import "./CharacterInfo.css";
 
 export default function View() {
-  const { characters, loading, error } = useCharacters();
+  const { characters, loading, error, loadCharacters, loadMore, hasMore } =
+    useCharacterDetail();
+
   const { searchTerm, filteredCharacters, handleSearchChange } =
     useSearch(characters);
 
-  if (loading) {
+  // Cargar personajes al montar el componente
+  useEffect(() => {
+    loadCharacters();
+  }, [loadCharacters]);
+
+  if (loading && characters.length === 0) {
+    // Si está cargando y no hay personajes aún
     return <div className="loading">Loading characters...</div>;
   }
 
@@ -33,12 +44,24 @@ export default function View() {
           }}
         />
       </div>
+
       <div className="characters-grid">
         {filteredCharacters.map((character) => (
           <CharacterInfo key={character.id} character={character} />
         ))}
       </div>
+
+      {hasMore && !loading && (
+        <button className="btn-verMas" onClick={loadMore}>
+          Ver más
+        </button>
+      )}
+
+      {loading && characters.length > 0 && (
+        <div className="loading" style={{ marginTop: "10px" }}>
+          Cargando más personajes...
+        </div>
+      )}
     </div>
   );
 }
-
