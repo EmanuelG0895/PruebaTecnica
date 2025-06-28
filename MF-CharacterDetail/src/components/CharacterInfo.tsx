@@ -75,13 +75,6 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
 
           <div className="detail-group">
             <div className="detail-item">
-              <span className="detail-label">Type</span>
-              <span className="detail-value">
-                {character.type || "Unknown"}
-              </span>
-            </div>
-
-            <div className="detail-item">
               <span className="detail-label">Location</span>
               <span className="detail-value">{character.location?.name}</span>
             </div>
@@ -93,15 +86,6 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
               </span>
             </div>
           </div>
-        </div>
-
-        <div className="character-footer">
-          <span className="created-date">
-            Created:{" "}
-            {character.created
-              ? new Date(character.created).toLocaleDateString()
-              : "Unknown"}
-          </span>
         </div>
       </div>
     </div>

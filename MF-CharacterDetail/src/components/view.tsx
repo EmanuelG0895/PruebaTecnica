@@ -11,13 +11,12 @@ export default function View() {
   const { searchTerm, filteredCharacters, handleSearchChange } =
     useSearch(characters);
 
-  // Cargar personajes al montar el componente
+
   useEffect(() => {
     loadCharacters();
   }, [loadCharacters]);
 
   if (loading && characters.length === 0) {
-    // Si está cargando y no hay personajes aún
     return <div className="loading">Loading characters...</div>;
   }
 
