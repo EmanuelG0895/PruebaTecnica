@@ -22,7 +22,7 @@ export default defineConfig({
   },
 
   devServer: {
-    port: 30002,
+    port: 3002,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, "src")],
   },
@@ -30,7 +30,7 @@ export default defineConfig({
     // You need to set a unique value that is not equal to other applications
     uniqueName: "MF_Characters",
     // publicPath must be configured if using manifest
-    publicPath: "http://localhost:30002/",
+    publicPath: "http://localhost:3002/",
   },
 
   experiments: {

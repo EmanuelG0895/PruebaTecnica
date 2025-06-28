@@ -2,8 +2,8 @@ export const mfConfig = {
   name: "MF_Shell",
   remotes: {
     MF_CharacterDetail:
-      "MF_CharacterDetail@http://localhost:3003/remoteEntry.js",
-    MF_Characters: "MF_Characters@http://localhost:30002/remoteEntry.js",
+      "MF_CharacterDetail@http://localhost:3002/remoteEntry.js",
+    MF_Characters: "MF_Characters@http://localhost:3001/remoteEntry.js",
   },
   shared: {
     react: { singleton: true },
