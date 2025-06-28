@@ -1,2 +1,6 @@
 import "./CharacterInfo.css";
-export default function View(): import("react/jsx-runtime").JSX.Element;
+interface ViewProps {
+    onCharacterClick?: (id: number) => void;
+}
+export default function View({ onCharacterClick }: ViewProps): import("react/jsx-runtime").JSX.Element;
+export { View };

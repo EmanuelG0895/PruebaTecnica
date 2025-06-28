@@ -2,6 +2,7 @@ import React from "react";
 import "./CharacterInfo.css";
 interface CharacterInfoProps {
     character: {
+        id: number;
         name: string;
         status: string;
         species: string;
@@ -17,6 +18,7 @@ interface CharacterInfoProps {
         episode: any[];
         created: string;
     };
+    onCharacterClick?: (id: number) => void;
 }
 declare const CharacterInfo: React.FC<CharacterInfoProps>;
 export default CharacterInfo;

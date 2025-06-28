@@ -4,17 +4,27 @@ import { useCharacterDetail } from "../hooks/useCharacterDetail"; // importa tu 
 import { useSearch } from "../hooks";
 import "./CharacterInfo.css";
 
-export default function View() {
+interface ViewProps {
+  onCharacterClick?: (id: number) => void;
+}
+
+export default function View({ onCharacterClick }: ViewProps) {
   const { characters, loading, error, loadCharacters, loadMore, hasMore } =
     useCharacterDetail();
 
   const { searchTerm, filteredCharacters, handleSearchChange } =
     useSearch(characters);
 
-
   useEffect(() => {
     loadCharacters();
   }, [loadCharacters]);
+
+  const handleCharacterClick = (id: number) => {
+    console.log("ID del personaje seleccionado:", id);
+    if (onCharacterClick) {
+      onCharacterClick(id);
+    }
+  };
 
   if (loading && characters.length === 0) {
     return <div className="loading">Loading characters...</div>;
@@ -46,7 +56,11 @@ export default function View() {
 
       <div className="characters-grid">
         {filteredCharacters.map((character) => (
-          <CharacterInfo key={character.id} character={character} />
+          <CharacterInfo 
+            key={character.id} 
+            character={character} 
+            onCharacterClick={handleCharacterClick}
+          />
         ))}
       </div>
 
@@ -64,3 +78,6 @@ export default function View() {
     </div>
   );
 }
+
+// Exportación nombrada para Module Federation
+export { View };

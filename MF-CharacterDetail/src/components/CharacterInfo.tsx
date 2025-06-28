@@ -3,6 +3,7 @@ import "./CharacterInfo.css";
 
 interface CharacterInfoProps {
   character: {
+    id: number;
     name: string;
     status: string;
     species: string;
@@ -14,9 +15,10 @@ interface CharacterInfoProps {
     episode: any[];
     created: string;
   };
+  onCharacterClick?: (id: number) => void;
 }
 
-const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
+const CharacterInfo: React.FC<CharacterInfoProps> = ({ character, onCharacterClick }) => {
   const getStatusClass = (status: string) => {
     switch (status?.toLowerCase()) {
       case "alive":
@@ -25,6 +27,13 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
         return "status-badge status-dead";
       default:
         return "status-badge status-unknown";
+    }
+  };
+
+  const handleClick = () => {
+    if (onCharacterClick && character?.id) {
+      onCharacterClick(character.id);
+      console.log(character.id)
     }
   };
 
@@ -39,7 +48,11 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
   }
 
   return (
-    <div className="character-card">
+    <div 
+      className="character-card" 
+      onClick={handleClick}
+      style={{ cursor: onCharacterClick ? 'pointer' : 'default' }}
+    >
       <img
         src={character.image || "/placeholder.svg"}
         alt={character.name}
