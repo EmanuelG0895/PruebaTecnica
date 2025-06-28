@@ -22,8 +22,8 @@ FROM node:18-alpine AS production
 
 WORKDIR /app
 
-# Install pnpm globally, curl for health checks, and rspack
-RUN npm install -g pnpm @rspack/cli && apk add --no-cache curl
+# Install pnpm globally, curl for health checks, and serve for static files
+RUN npm install -g pnpm serve && apk add --no-cache curl
 
 # Copy built application
 COPY --from=builder /app/dist ./dist

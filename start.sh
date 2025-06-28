@@ -18,4 +18,4 @@ done
 echo "All microfrontends are ready! Starting MF-Shell..."
 
 # Start the main application
-exec pnpm run build:start 
+exec pnpm run start:prod 
