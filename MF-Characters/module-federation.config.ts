@@ -1,5 +1,8 @@
 export const mfConfig = {
   name: "MF_Characters",
-  exposes: {},
+  filename: "remoteEntry.js",
+  exposes: {
+    "./Vista": "./src/components/Vista",
+  },
   shared: ["react", "react-dom"],
 };
