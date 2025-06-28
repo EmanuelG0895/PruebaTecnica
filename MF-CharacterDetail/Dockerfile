@@ -22,10 +22,10 @@ FROM node:18-alpine AS production
 
 WORKDIR /app
 
-# Install pnpm globally, curl for health checks, and rspack
-RUN npm install -g pnpm @rspack/cli && apk add --no-cache curl
+# Install pnpm globally, curl for health checks, and serve for static files
+RUN npm install -g pnpm serve && apk add --no-cache curl
 
-# Copy built application
+# Copy built application and necessary files
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/pnpm-lock.yaml ./
@@ -37,4 +37,4 @@ RUN pnpm install --prod
 EXPOSE 3002
 
 # Start the application
-CMD ["pnpm", "run", "build:start"] 
+CMD ["pnpm", "run", "start:prod"] 
